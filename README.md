@@ -25,12 +25,12 @@ npm run dev
 The following is a list of the packages I use in this project
 
 ```sh
-axios
-next
-prop-types
-react
-react-dom
-react-responsive
-sass
-styled-components
+Axios
+NextJS
+Proptypes
+React
+React DOM
+React Responsive
+SASS
+Styled-components
 ```
