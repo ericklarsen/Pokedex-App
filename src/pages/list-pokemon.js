@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import MainLayout from "../components/layout/MainLayout";
 import Flex from "../components/atoms/Flex";
 import Button from "../components/atoms/Button";
 import Img from "../components/atoms/Img";
 import styled from "styled-components";
-import { requestData } from "../helpers/global_helper";
 import Card from "../components/molecules/Card/Card";
 import Loading from "../components/molecules/Loading/Loading";
 import Typo from "../components/atoms/Typography";
@@ -13,6 +12,8 @@ import Footer from "../components/molecules/Footer/Footer";
 import DetailPokemon from "../components/organism/DetailPokemon/DetailPokemon";
 import UseGetDetailPokemonData from "../hooks/UseGetDetailPokemonData";
 import FilterPokemon from "../components/organism/DetailPokemon/FilterPokemon";
+import Search from "../components/molecules/Search/Search";
+import NotFoundState from "../components/molecules/NotFoundState/NotFoundState";
 
 const { bold } = font;
 const { mobileXL } = breakPoint;
@@ -39,6 +40,7 @@ const pokemonList = () => {
 
   const [selected, setSelected] = useState({});
   const [expand, setExpand] = useState(false);
+  const [search, setSearch] = useState("");
 
   const [selectedType, setSelectedType] = useState({});
 
@@ -57,40 +59,23 @@ const pokemonList = () => {
     setSelected(data);
   };
 
-  useEffect(() => {
-    setCurrentUrl(null);
-    setNextUrl(null);
-    setPrevUrl(null);
-    async function fetchData() {
-      setLoading(true);
-      let response = await requestData(selectedType.url);
-      await loadPokemonDetail(response.pokemon);
-      setLoading(false);
-    }
-    selectedType?.url && fetchData();
-  }, [selectedType]);
-
-  const loadPokemonDetail = async (data) => {
-    let _data = await Promise.all(
-      data.map(async (item) => {
-        let record = await requestData(item.pokemon.url);
-        return record;
-      })
-    );
-    setPokemonData(_data);
-  };
-
   return (
     <MainLayout title="Pokedex - List Pokemon">
-      <Flex width="100%" padding="24px 16px" justifyContent="space-between" alignItems="center">
+      <Flex width="100%" padding="36px 16px" justifyContent="space-between" alignItems="center">
         <Logo src="/static/img/logo_pokemon.png" onClick={() => (window.location.href = "/")} />
         <Flex alignItems="center" wrap="wrap" justifyContent="flex-end">
           <Flex wrap="wrap" justifyContent="flex-end" alignItems="center">
-            <FilterPokemon
-              selected={selectedType}
-              onSelected={setSelectedType}
-              onCurrentUrl={setCurrentUrl}
-            />
+            {!search && (
+              <FilterPokemon
+                selectedType={selectedType}
+                setSelectedType={setSelectedType}
+                setCurrentUrl={setCurrentUrl}
+                setNextUrl={setNextUrl}
+                setPrevUrl={setPrevUrl}
+                setPokemonData={setPokemonData}
+                onLoading={setLoading}
+              />
+            )}
             {prevUrl && (
               <Button
                 onClick={handleBack}
@@ -119,6 +104,20 @@ const pokemonList = () => {
           </Flex>
         </Flex>
       </Flex>
+      {!selectedType?.name && (
+        <Flex width="100%" maxWidth="500px" margin="0 auto" padding="0 24px">
+          <Search
+            search={search}
+            width="100%"
+            setSearch={setSearch}
+            setPokemonData={setPokemonData}
+            setNextUrl={setNextUrl}
+            setPrevUrl={setPrevUrl}
+            setCurrentUrl={setCurrentUrl}
+            setLoading={setLoading}
+          />
+        </Flex>
+      )}
       {loading ? (
         <Loading />
       ) : (
@@ -128,9 +127,21 @@ const pokemonList = () => {
           padding="0 16px"
           style={{ marginTop: "50px", flexWrap: "wrap" }}
         >
-          {pokemonData.map((item) => (
-            <Card key={item.id} data={item} onClick={() => handleSelected(item)} />
-          ))}
+          {pokemonData.length ? (
+            pokemonData.map((item) => (
+              <Card key={item.id} data={item} onClick={() => handleSelected(item)} />
+            ))
+          ) : (
+            <Flex
+              direction="column"
+              width="100%"
+              height="50vh"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <NotFoundState />
+            </Flex>
+          )}
         </Flex>
       )}
       <DetailPokemon expand={expand} setExpand={setExpand} title="Detail Pokemon" data={selected} />

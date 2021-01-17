@@ -10,6 +10,7 @@ import Button from "../../atoms/Button";
 import { capitalize } from "../../../helpers/global_helper";
 import UseGetDetailPokemonData from "../../../hooks/UseGetDetailPokemonData";
 import Spinner from "../../atoms/Spinner";
+import Search from "../../molecules/Search/Search";
 
 const { black200, black400 } = blackShades;
 const { bold } = font;
@@ -22,17 +23,19 @@ const ItemContainer = styled(Flex)`
   overflow-x: hidden;
   flex-direction: column;
   flex-shrink: 0;
+  margin-top: 16px;
 `;
 
 const ItemBox = styled(Flex)`
   width: 100%;
   border: 1px solid ${black200};
   border-radius: 8px;
-  padding: 10px 14px;
+  padding: 0 14px 10px 14px;
   align-items: center;
   margin-bottom: 16px;
   cursor: pointer;
   animation: fade 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  flex-shrink: 0;
 
   @keyframes fade {
     0% {
@@ -55,6 +58,8 @@ const ListPokemon = ({ expand, setExpand, selected, anotherSelected, onSelected 
   const [currentUrl, setCurrentUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
 
   const [currentSelected, setCurrentSelected] = useState([]);
+
+  const [search, setSearch] = useState("");
 
   UseGetDetailPokemonData({ setLoading, currentUrl, setNextUrl, setPrevUrl, setPokemonData });
 
@@ -80,12 +85,21 @@ const ListPokemon = ({ expand, setExpand, selected, anotherSelected, onSelected 
   return (
     <Modal isVisible={expand} handleVisible={setExpand} title="List Pokemon">
       <Flex direction="column" width="100%" padding="20px">
+        <Search
+          search={search}
+          setSearch={setSearch}
+          setPokemonData={setPokemonData}
+          setNextUrl={setNextUrl}
+          setPrevUrl={setPrevUrl}
+          setCurrentUrl={setCurrentUrl}
+          setLoading={setLoading}
+        />
         <ItemContainer>
           {loading ? (
             <Flex width="100%" height="400px" justifyContent="center" alignItems="center">
               <Spinner />
             </Flex>
-          ) : (
+          ) : pokemonData.length > 0 ? (
             pokemonData
               .filter((fil) => fil.id !== anotherSelected?.id)
               .map((item) => (
@@ -103,14 +117,14 @@ const ListPokemon = ({ expand, setExpand, selected, anotherSelected, onSelected 
                   <Flex width="55px" height="55px" margin="0 0 0 16px">
                     <Img src={item.sprites.front_default} maxWidth="55px" />
                   </Flex>
-                  <Flex flex="1" wrap="wrap">
-                    <Flex flex="1" direction="column" margin="0 0 0 24px">
+                  <Flex width="100%" wrap="wrap" justifyContent="space-between">
+                    <Flex width="25%" direction="column" margin="10px 0 0 24px">
                       <Typo variant="caption" color={black400} margin="0 0 2px 0">
                         Name
                       </Typo>
                       <Typo font={bold}>{capitalize(item.name)}</Typo>
                     </Flex>
-                    <Flex flex="1" direction="column" margin="0 0 0 24px">
+                    <Flex width="25%" direction="column" margin="10px 0 0 24px">
                       <Typo variant="caption" color={black400} margin="0 0 2px 0">
                         Type
                       </Typo>
@@ -122,7 +136,7 @@ const ListPokemon = ({ expand, setExpand, selected, anotherSelected, onSelected 
                         )}
                       </Typo>
                     </Flex>
-                    <Flex flex="1" direction="column" margin="0 0 0 24px">
+                    <Flex width="25%" direction="column" margin="10px 0 0 24px">
                       <Typo variant="caption" color={black400} margin="0 0 2px 0">
                         Species
                       </Typo>
@@ -131,6 +145,23 @@ const ListPokemon = ({ expand, setExpand, selected, anotherSelected, onSelected 
                   </Flex>
                 </ItemBox>
               ))
+          ) : (
+            <Flex
+              direction="column"
+              width="100%"
+              height="400px"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Img
+                src="/static/img/ic_pokemon_logo_outline.png"
+                maxWidth="200px"
+                style={{ opacity: 0.5 }}
+              />
+              <Typo color={black400} margin="8px 0 0 0">
+                Not Found
+              </Typo>
+            </Flex>
           )}
         </ItemContainer>
         <Flex width="100%" justifyContent="center" padding="12px 0">
@@ -147,11 +178,13 @@ const ListPokemon = ({ expand, setExpand, selected, anotherSelected, onSelected 
               </Typo>
             </Button>
           )}
-          <Button onClick={handleNext} variant="blue" padding="10px 24px" width="fit-content">
-            <Typo variant="body2" color="white" font={bold}>
-              next
-            </Typo>
-          </Button>
+          {nextUrl && (
+            <Button onClick={handleNext} variant="blue" padding="10px 24px" width="fit-content">
+              <Typo variant="body2" color="white" font={bold}>
+                next
+              </Typo>
+            </Button>
+          )}
         </Flex>
         <Flex width="100%">
           <Button
