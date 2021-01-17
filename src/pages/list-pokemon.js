@@ -11,6 +11,8 @@ import Typo from "../components/atoms/Typography";
 import { font, breakPoint } from "../styles/_variables";
 import Footer from "../components/molecules/Footer/Footer";
 import DetailPokemon from "../components/organism/DetailPokemon/DetailPokemon";
+import UseGetDetailPokemonData from "../hooks/UseGetDetailPokemonData";
+import FilterPokemon from "../components/organism/DetailPokemon/FilterPokemon";
 
 const { bold } = font;
 const { mobileXL } = breakPoint;
@@ -18,9 +20,12 @@ const { mobileXL } = breakPoint;
 const Logo = styled(Img)`
   max-width: 214px;
   width: 100%;
+  cursor: pointer;
 
   @media only screen and (max-width: ${mobileXL + 1}px) {
-    max-width: 140px;
+    max-width: 100px;
+    width: 100%;
+    margin-right: 10px;
   }
 `;
 
@@ -35,27 +40,9 @@ const pokemonList = () => {
   const [selected, setSelected] = useState({});
   const [expand, setExpand] = useState(false);
 
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      let response = await requestData(currentUrl);
-      setNextUrl(response.next);
-      setPrevUrl(response.previous);
-      await loadPokemonDetail(response.results);
-      setLoading(false);
-    }
-    fetchData();
-  }, [currentUrl]);
+  const [selectedType, setSelectedType] = useState({});
 
-  const loadPokemonDetail = async (data) => {
-    let _data = await Promise.all(
-      data.map(async (pokemon) => {
-        let pokemonRecord = await requestData(pokemon.url);
-        return pokemonRecord;
-      })
-    );
-    setPokemonData(_data);
-  };
+  UseGetDetailPokemonData({ setLoading, currentUrl, setNextUrl, setPrevUrl, setPokemonData });
 
   const handleNext = () => {
     setCurrentUrl(nextUrl);
@@ -70,34 +57,66 @@ const pokemonList = () => {
     setSelected(data);
   };
 
+  useEffect(() => {
+    setCurrentUrl(null);
+    setNextUrl(null);
+    setPrevUrl(null);
+    async function fetchData() {
+      setLoading(true);
+      let response = await requestData(selectedType.url);
+      await loadPokemonDetail(response.pokemon);
+      setLoading(false);
+    }
+    selectedType?.url && fetchData();
+  }, [selectedType]);
+
+  const loadPokemonDetail = async (data) => {
+    let _data = await Promise.all(
+      data.map(async (item) => {
+        let record = await requestData(item.pokemon.url);
+        return record;
+      })
+    );
+    setPokemonData(_data);
+  };
+
   return (
     <MainLayout title="Pokedex - List Pokemon">
       <Flex width="100%" padding="24px 16px" justifyContent="space-between" alignItems="center">
         <Logo src="/static/img/logo_pokemon.png" onClick={() => (window.location.href = "/")} />
         <Flex alignItems="center" wrap="wrap" justifyContent="flex-end">
-          {prevUrl && (
-            <Button
-              onClick={handleBack}
-              width="fit-content"
-              padding="10px 32px"
-              margin="0 10px 10px 0"
-            >
-              <Typo variant="body2" font={bold} color="white">
-                Back
-              </Typo>
-            </Button>
-          )}
-          <Button
-            onClick={handleNext}
-            variant="green"
-            width="fit-content"
-            padding="10px 32px"
-            margin="0 10px 10px 0"
-          >
-            <Typo variant="body2" font={bold} color="white">
-              Next
-            </Typo>
-          </Button>
+          <Flex wrap="wrap" justifyContent="flex-end" alignItems="center">
+            <FilterPokemon
+              selected={selectedType}
+              onSelected={setSelectedType}
+              onCurrentUrl={setCurrentUrl}
+            />
+            {prevUrl && (
+              <Button
+                onClick={handleBack}
+                width="fit-content"
+                padding="10px 32px"
+                margin="0 10px 10px 0"
+              >
+                <Typo variant="body2" font={bold} color="white">
+                  Back
+                </Typo>
+              </Button>
+            )}
+            {nextUrl && (
+              <Button
+                onClick={handleNext}
+                variant="green"
+                width="fit-content"
+                padding="10px 32px"
+                margin="0 10px 10px 0"
+              >
+                <Typo variant="body2" font={bold} color="white">
+                  Next
+                </Typo>
+              </Button>
+            )}
+          </Flex>
         </Flex>
       </Flex>
       {loading ? (
