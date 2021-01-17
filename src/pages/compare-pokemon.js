@@ -49,7 +49,13 @@ const comparePokemon = () => {
             <Typo variant="body2" color={black400} font={semiBold}>
               My Pokemon
             </Typo>
-            <Img src={myPokemon.sprites.front_default} width="88px" margin="28px 0 12px 0" />
+            <Img
+              src={myPokemon.sprites.front_default}
+              width="100%"
+              maxWidth="140px"
+              margin="28px 0 12px 0"
+              alt="pokemon"
+            />
             <Typo variant="caption" color={black400} margin="0 0 2px 0">
               Name
             </Typo>
@@ -72,10 +78,11 @@ const comparePokemon = () => {
             width="100%"
             maxWidth="100%"
             minHeight="267px"
+            height="100%"
             onClick={() => setExpandMine(true)}
             style={{ cursor: "pointer" }}
           >
-            <Img maxWidth="56px" src="/static/svg/ic_plus.svg" />
+            <Img maxWidth="56px" src="/static/svg/ic_plus.svg" alt="plus-button" />
             <Typo
               variant="body2"
               color={black400}
@@ -86,13 +93,19 @@ const comparePokemon = () => {
             </Typo>
           </Box>
         )}
-        <Img src="/static/svg/ic_switch.svg" margin="16px" />
+        <Img src="/static/svg/ic_switch.svg" margin="16px" alt="switch-icon" />
         {otherPokemon?.id ? (
           <Box width="100%" maxWidth="100%">
             <Typo variant="body2" color={black400} font={semiBold}>
               Other Pokemon
             </Typo>
-            <Img src={otherPokemon.sprites.front_default} width="88px" margin="28px 0 12px 0" />
+            <Img
+              src={otherPokemon.sprites.front_default}
+              width="100%"
+              maxWidth="140px"
+              margin="28px 0 12px 0"
+              alt="other-pokemon"
+            />
             <Typo variant="caption" color={black400} margin="0 0 2px 0">
               Name
             </Typo>
@@ -115,10 +128,11 @@ const comparePokemon = () => {
             width="100%"
             maxWidth="100%"
             minHeight="267px"
+            height="100%"
             onClick={() => setExpandOther(true)}
             style={{ cursor: "pointer" }}
           >
-            <Img src="/static/svg/ic_plus.svg" />
+            <Img src="/static/svg/ic_plus.svg" alt="plus-button" />
             <Typo
               variant="body2"
               color={black400}
