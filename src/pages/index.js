@@ -6,6 +6,7 @@ import { font, breakPoint } from "../styles/_variables";
 import Img from "../components/atoms/Img";
 import MenuButton from "../components/molecules/MenuButton/MenuButton";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 const { semiBold } = font;
 const { mobileXL } = breakPoint;
@@ -25,6 +26,8 @@ const Wrapper = styled(Flex)`
 `;
 
 const index = () => {
+  const router = useRouter();
+
   return (
     <HomagepageLayout>
       <Wrapper>
@@ -45,7 +48,7 @@ const index = () => {
           caption="Pokemon"
           variant="orange"
           icon="/static/svg/ic_search.svg"
-          onClick={() => (window.location.href = "/list-pokemon")}
+          onClick={() => router.push("/list-pokemon")}
         />
         <Flex width="100%" justifyContent="space-evenly" alignItems="center" wrap="wrap">
           <MenuButton
@@ -54,7 +57,7 @@ const index = () => {
             variant="green"
             icon="/static/svg/ic_compare.svg"
             margin="16px 0 0 0"
-            onClick={() => (window.location.href = "/compare-pokemon")}
+            onClick={() => router.push("/compare-pokemon")}
           />
           <MenuButton
             label="Win Rate"
@@ -62,7 +65,7 @@ const index = () => {
             variant="blue"
             icon="/static/svg/ic_winrate.svg"
             margin="16px 0 0 0"
-            onClick={() => (window.location.href = "/win-rate-pokemon")}
+            onClick={() => router.push("/win-rate-pokemon")}
           />
         </Flex>
       </Wrapper>
