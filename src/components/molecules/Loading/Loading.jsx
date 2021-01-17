@@ -13,7 +13,7 @@ const Container = styled(Flex)`
   left: 0;
   top: 0;
   z-index: 100;
-  pointer-events: none;
+  pointer-events: visible;
 `;
 
 const Overlay = styled(Flex)`
@@ -37,16 +37,17 @@ const LoadingIcon = styled(Img)`
       transform: translateY(10px);
     }
     25% {
-      opacity: 1;
       transform: translateY(0px);
     }
     32% {
       transform: translateY(10px);
     }
     50% {
+      opacity: 1;
       transform: scale(1.1) rotate(360deg);
     }
     100% {
+      opacity: 0;
       transform: scale(1) rotate(0);
     }
   }
