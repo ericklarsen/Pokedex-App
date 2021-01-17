@@ -22,14 +22,14 @@ const Container = styled(Flex)`
   z-index: 10;
 
   @media only screen and (max-width: ${mobileXL + 1}px) {
-    background-color: rgba(255, 255, 255, 0.8);
     padding: 24px;
   }
 `;
 
-const Footer = ({ position }) => {
+const Footer = (props) => {
+  const { position } = props;
   return (
-    <Container position={position}>
+    <Container position={position} {...props}>
       <Typo font={semiBold} color={black400} style={{ textAlign: "center" }}>
         All rights reserved by Erick Larsen © {new Date().getFullYear()}
       </Typo>
