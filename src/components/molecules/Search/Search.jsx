@@ -35,7 +35,7 @@ const Search = ({
         }
         setPokemonData([response]);
       }
-    }, 200);
+    }, 500);
 
     return () => clearTimeout(delayDebounceFn);
   }, [search]);
@@ -53,12 +53,14 @@ const Search = ({
           width="18px"
           style={{ cursor: "pointer", opacity: 0.5 }}
           onClick={() => setSearch("")}
+          alt="close-button"
         />
       ) : (
         <Img
           src="/static/svg/ic_search_black.svg"
           width="18px"
           style={{ cursor: "pointer", opacity: 0.5 }}
+          alt="search-button"
         />
       )}
     </Input>
