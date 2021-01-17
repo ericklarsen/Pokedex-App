@@ -153,7 +153,7 @@ const FilterPokemon = ({
 };
 
 FilterPokemon.propTypes = {
-  selectedType: PropTypes.func,
+  selectedType: PropTypes.object,
   setSelectedType: PropTypes.func,
   setCurrentUrl: PropTypes.func,
   setNextUrl: PropTypes.func,
