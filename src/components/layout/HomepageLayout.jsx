@@ -6,21 +6,24 @@ import MainLayout from "./MainLayout";
 import Footer from "../molecules/Footer/Footer";
 import Flex from "../atoms/Flex";
 
-const { mobileXL } = breakPoint;
+const { mobileXL, tabletXL } = breakPoint;
 
 const ImageOverlayBottom = styled.img`
   position: fixed;
   width: 100%;
-  max-width: 240px;
+  max-width: 300px;
   left: ${(props) => props.left && "10%"};
   right: ${(props) => props.right && "10%"};
   bottom: -6%;
-  z-index: 0;
+  z-index: -1;
   animation: infinite ${(props) => (props.right ? "right-animate" : props.left && "left-animate")}
     2.5s cubic-bezier(0.66, 0, 0.19, 1);
 
+  @media only screen and (max-width: ${tabletXL + 1}px) {
+    max-width: 240px;
+  }
+
   @media only screen and (max-width: ${mobileXL + 1}px) {
-    max-width: 200px;
     opacity: 0;
   }
 
@@ -80,9 +83,9 @@ const HomepageLayout = ({ children }) => {
       >
         <Logo src="/static/img/logo_pokemon.png" />
         {children}
-        <ImageOverlayBottom left src="/static/img/img_snorlax.png" />
-        <ImageOverlayMiddle src="/static/svg/pokedex_overlay.svg" />
-        <ImageOverlayBottom right src="/static/img/img_ash.png" />
+        <ImageOverlayBottom left src="/static/img/img_snorlax.png" alt="snorlax" />
+        <ImageOverlayMiddle src="/static/svg/pokedex_overlay.svg" alt="pokedex-overlay" />
+        <ImageOverlayBottom right src="/static/img/img_ash.png" alt="ash" />
         <Footer position="static" />
       </Flex>
     </MainLayout>
