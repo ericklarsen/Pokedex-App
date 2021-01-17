@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Flex from "../../atoms/Flex";
 import Img from "../../atoms/Img";
+import UseDisableBodyScroll from "../../../hooks/UseDisableBodyScroll";
 
 const Container = styled.div`
   position: fixed;
@@ -64,6 +65,7 @@ const Header = styled(Flex)`
 `;
 
 const Bottomsheet = ({ isVisible, handleVisible, children }) => {
+  UseDisableBodyScroll(isVisible);
   return (
     <Container isVisible={isVisible}>
       <Sheet isVisible={isVisible}>
