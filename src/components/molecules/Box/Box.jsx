@@ -7,7 +7,7 @@ const Container = styled(Flex)`
   width: ${(props) => props.width || "fit-content"};
   max-width: ${(props) => props.maxWidth || "255px"};
   padding: ${(props) => props.padding || "20px"};
-  height: ${(props) => props.height || "100%"};
+  height: ${(props) => props.height || "fit-content"};
   max-height: ${(props) => props.maxHeight || "auto"};
   min-height: ${(props) => props.minHeight || "auto"};
   justify-content: center;
