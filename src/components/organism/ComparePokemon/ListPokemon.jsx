@@ -24,6 +24,8 @@ const ItemContainer = styled(Flex)`
   flex-direction: column;
   flex-shrink: 0;
   margin-top: 16px;
+  scrollbar-width: thin;
+  padding-right: 8px;
 `;
 
 const ItemBox = styled(Flex)`
