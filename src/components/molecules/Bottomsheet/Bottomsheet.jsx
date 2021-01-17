@@ -18,13 +18,14 @@ const Container = styled.div`
   transition: all 200ms ease-in-out;
   pointer-events: ${(props) => (props.isVisible ? "visible" : "none")};
   opacity: ${(props) => (props.isVisible ? "1" : "0")};
+  z-index: 1000;
 `;
 
 const Sheet = styled(Flex)`
   flex-direction: column;
   position: fixed;
   width: 100%;
-  height: 60vh;
+  height: ${(props) => props.height || "60vh"};
   background-color: white;
   bottom: 0;
   left: 0;
@@ -64,11 +65,11 @@ const Header = styled(Flex)`
   justify-content: flex-end;
 `;
 
-const Bottomsheet = ({ isVisible, handleVisible, children }) => {
+const Bottomsheet = ({ isVisible, handleVisible, children, ...props }) => {
   UseDisableBodyScroll(isVisible);
   return (
     <Container isVisible={isVisible}>
-      <Sheet isVisible={isVisible}>
+      <Sheet isVisible={isVisible} {...props}>
         <Header>
           <Img
             width="18px"
