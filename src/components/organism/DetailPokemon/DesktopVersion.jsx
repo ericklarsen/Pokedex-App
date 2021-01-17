@@ -28,9 +28,13 @@ const DesktopVersion = ({ data, abilities }) => {
         <Flex flex="1" direction="column" alignItems="center" margin="0 32px 0 0">
           <Typo variant="caption">Pokemon Name</Typo>
           <Typo variant="h5" font={bold}>
-            {data.name}
+            {capitalize(data.name)}
           </Typo>
-          <Img width="100%" src={data.sprites.front_default} margin="14px 0 0 0" />
+          <Img
+            width="100%"
+            src={data.sprites.front_default || "/static/img/logo_pokemon.png"}
+            margin="14px 0 0 0"
+          />
         </Flex>
 
         <Flex flex="1.8" direction="column" margin="0 0 0 32px">
@@ -48,13 +52,15 @@ const DesktopVersion = ({ data, abilities }) => {
           <Typo variant="h6" font={bold} margin=" 0 0 16px 0">
             About
           </Typo>
-          <About label="Species" value={data.species.name} />
+          <About label="Species" value={capitalize(data.species.name)} />
           <About label="Height" value={data.height} />
           <About label="Weight" value={data.weight} />
           <About
             label="Type"
             value={data.types.map((item, key) =>
-              key < data.types.length - 1 ? item.type.name + ", " : item.type.name
+              key < data.types.length - 1
+                ? capitalize(item.type.name) + ", "
+                : capitalize(item.type.name)
             )}
           />
         </Flex>

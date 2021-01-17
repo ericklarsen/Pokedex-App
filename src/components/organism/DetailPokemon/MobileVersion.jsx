@@ -51,13 +51,15 @@ const MobileVersion = ({ data, abilities }) => {
           <Typo variant="h6" font={bold} margin=" 0 0 16px 0">
             About
           </Typo>
-          <About label="Species" value={data.species.name} />
+          <About label="Species" value={capitalize(data.species.name)} />
           <About label="Height" value={data.height} />
           <About label="Weight" value={data.weight} />
           <About
             label="Type"
             value={data.types.map((item, key) =>
-              key < data.types.length - 1 ? item.type.name + ", " : item.type.name
+              key < data.types.length - 1
+                ? capitalize(item.type.name) + ", "
+                : capitalize(item.type.name)
             )}
           />
         </Flex>
