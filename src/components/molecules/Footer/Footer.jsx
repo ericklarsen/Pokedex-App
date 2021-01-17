@@ -20,6 +20,7 @@ const Container = styled(Flex)`
   left: 0;
   padding: 40px;
   z-index: 10;
+  flex-shrink: 0;
 
   @media only screen and (max-width: ${mobileXL + 1}px) {
     padding: 24px;
