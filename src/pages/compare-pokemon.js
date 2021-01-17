@@ -67,8 +67,14 @@ const comparePokemon = () => {
             </Button>
           </Box>
         ) : (
-          <Box width="100%" maxWidth="100%" minHeight="267px" onClick={() => setExpandMine(true)}>
-            <Img maxWidth="56px" src="/static/svg/ic_plus.svg" style={{ cursor: "pointer" }} />
+          <Box
+            width="100%"
+            maxWidth="100%"
+            minHeight="267px"
+            onClick={() => setExpandMine(true)}
+            style={{ cursor: "pointer" }}
+          >
+            <Img maxWidth="56px" src="/static/svg/ic_plus.svg" />
             <Typo
               variant="body2"
               color={black400}
@@ -104,8 +110,14 @@ const comparePokemon = () => {
             </Button>
           </Box>
         ) : (
-          <Box width="100%" maxWidth="100%" minHeight="267px" onClick={() => setExpandOther(true)}>
-            <Img src="/static/svg/ic_plus.svg" style={{ cursor: "pointer" }} />
+          <Box
+            width="100%"
+            maxWidth="100%"
+            minHeight="267px"
+            onClick={() => setExpandOther(true)}
+            style={{ cursor: "pointer" }}
+          >
+            <Img src="/static/svg/ic_plus.svg" />
             <Typo
               variant="body2"
               color={black400}
