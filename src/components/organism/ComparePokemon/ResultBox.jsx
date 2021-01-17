@@ -16,13 +16,15 @@ const Container = styled(Box)`
   width: 100%;
   margin-top: 24px;
   animation: pop-up 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97);
-
+  flex-shrink: 0;
   @media only screen and (max-width: ${mobileXL + 1}px) {
     margin-bottom: 24px;
   }
 `;
 
 const Wrapper = styled(Flex)`
+  flex-shrink: 0;
+  height: 100%;
   @media only screen and (max-width: ${mobileXL + 1}px) {
     flex-direction: column;
 
@@ -84,6 +86,10 @@ const ResultBox = ({ myPokemon, otherPokemon }) => {
               different={item.base_stat - otherPokemon?.stats[key]?.base_stat}
             />
           ))}
+          <Typo variant="caption" color={black400}>
+            For your information: the right side value (red & green) is the difference between your
+            pokemon and other pokemon
+          </Typo>
         </Flex>
       </Wrapper>
     </Container>

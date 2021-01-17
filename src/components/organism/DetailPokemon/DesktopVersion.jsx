@@ -8,23 +8,24 @@ import BaseStats from "./BaseStats";
 import About from "./About";
 import Abilities from "./Abilities";
 import { capitalize } from "../../../helpers/global_helper";
+import styled from "styled-components";
 
 const { bold } = font;
 
+const Wrapper = styled(Flex)`
+  width: 100%;
+  flex-direction: column;
+  padding: 32px;
+  justify-content: space-between;
+  max-height: 600px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+`;
+
 const DesktopVersion = ({ data, abilities }) => {
   return (
-    <Flex
-      width="100%"
-      direction="column"
-      padding="32px"
-      justfifyContent="space-between"
-      style={{
-        maxHeight: "600px",
-        overflowY: "auto",
-        scrollbarWidth: "thin",
-      }}
-    >
-      <Flex width="100%">
+    <Wrapper>
+      <Flex width="100%" style={{ flexShrink: 0 }}>
         <Flex flex="1" direction="column" alignItems="center" margin="0 32px 0 0">
           <Typo variant="caption">Pokemon Name</Typo>
           <Typo variant="h5" font={bold}>
@@ -47,14 +48,14 @@ const DesktopVersion = ({ data, abilities }) => {
         </Flex>
       </Flex>
 
-      <Flex width="100%" margin="32px 0 0 0">
+      <Flex width="100%" margin="32px 0 0 0" style={{ flexShrink: 0 }}>
         <Flex flex="1" direction="column" margin="0 32px 0 0">
           <Typo variant="h6" font={bold} margin=" 0 0 16px 0">
             About
           </Typo>
           <About label="Species" value={capitalize(data.species.name)} />
-          <About label="Height" value={data.height} />
-          <About label="Weight" value={data.weight} />
+          <About label="Height" value={data.height / 10 + " m"} />
+          <About label="Weight" value={data.weight / 10 + " kg"} />
           <About
             label="Type"
             value={data.types.map((item, key) =>
@@ -82,7 +83,7 @@ const DesktopVersion = ({ data, abilities }) => {
           ))}
         </Flex>
       </Flex>
-    </Flex>
+    </Wrapper>
   );
 };
 
