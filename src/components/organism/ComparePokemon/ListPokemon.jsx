@@ -14,7 +14,7 @@ const ListPokemon = ({ expand, setExpand, selected, anotherSelected, onSelected 
   const [prevUrl, setPrevUrl] = useState("");
   const [currentUrl, setCurrentUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
 
-  const [currentSelected, setCurrentSelected] = useState([]);
+  const [currentSelected, setCurrentSelected] = useState({});
 
   const [search, setSearch] = useState("");
 
