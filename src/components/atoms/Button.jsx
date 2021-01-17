@@ -28,6 +28,7 @@ const Container = styled.button`
   outline: none;
   cursor: pointer;
   transition: all 150ms ease-in-out;
+  flex-shrink: 0;
 
   :hover {
     transform: ${(props) => props.animation && "scale(1.05)"};
