@@ -4,15 +4,16 @@ import styled from "styled-components";
 import { breakPoint } from "../../styles/_variables";
 import MainLayout from "./MainLayout";
 import Footer from "../molecules/Footer/Footer";
+import Flex from "../atoms/Flex";
 
 const { mobileXL } = breakPoint;
 
 const ImageOverlayBottom = styled.img`
-  position: absolute;
+  position: fixed;
   width: 100%;
   max-width: 240px;
-  left: ${(props) => props.left && "6%"};
-  right: ${(props) => props.right && "6%"};
+  left: ${(props) => props.left && "10%"};
+  right: ${(props) => props.right && "10%"};
   bottom: -6%;
   z-index: 0;
   animation: infinite ${(props) => (props.right ? "right-animate" : props.left && "left-animate")}
@@ -20,6 +21,7 @@ const ImageOverlayBottom = styled.img`
 
   @media only screen and (max-width: ${mobileXL + 1}px) {
     max-width: 200px;
+    opacity: 0;
   }
 
   @keyframes right-animate {
@@ -59,26 +61,30 @@ const ImageOverlayMiddle = styled.img`
 `;
 
 const Logo = styled.img`
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 62px;
-  margin: 0 auto;
-  width: 100%;
   max-width: 462px;
-  z-index: 10;
+  margin: 0 auto;
+  margin-top: 40px;
+  width: 100%;
   padding: 0 16px;
 `;
 
 const HomepageLayout = ({ children }) => {
   return (
     <MainLayout title="Pokedex - Go Search Your Pokemon" lockScroll>
-      <Logo src="/static/img/logo_pokemon.png" />
-      {children}
-      <ImageOverlayBottom left src="/static/img/img_snorlax.png" />
-      <ImageOverlayMiddle src="/static/svg/pokedex_overlay.svg" />
-      <ImageOverlayBottom right src="/static/img/img_ash.png" />
-      <Footer />
+      <Flex
+        direction="column"
+        width="100%"
+        height="100%"
+        justifyContent="center"
+        alignItems="space-between"
+      >
+        <Logo src="/static/img/logo_pokemon.png" />
+        {children}
+        <ImageOverlayBottom left src="/static/img/img_snorlax.png" />
+        <ImageOverlayMiddle src="/static/svg/pokedex_overlay.svg" />
+        <ImageOverlayBottom right src="/static/img/img_ash.png" />
+        <Footer position="static" />
+      </Flex>
     </MainLayout>
   );
 };
