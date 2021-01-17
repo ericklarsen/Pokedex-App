@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/react-in-jsx-scope */
-import "../styles/globals.scss";
 // import App from 'next/app'
+import "../styles/globals.scss";
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;
