@@ -21,6 +21,7 @@ const Container = styled.div`
   pointer-events: ${(props) => (props.isVisible ? "visible" : "none")};
   opacity: ${(props) => (props.isVisible ? "1" : "0")};
   transition: all 200ms ease-in-out;
+  z-index: 1000;
 `;
 
 const ModalContainer = styled.div`
