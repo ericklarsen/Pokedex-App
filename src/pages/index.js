@@ -2,29 +2,37 @@ import React from "react";
 import HomagepageLayout from "../components/layout/HomepageLayout";
 import Typo from "../components/atoms/Typography";
 import Flex from "../components/atoms/Flex";
-import { font } from "../styles/_variables";
+import { font, breakPoint } from "../styles/_variables";
 import Img from "../components/atoms/Img";
 import MenuButton from "../components/molecules/MenuButton/MenuButton";
+import styled from "styled-components";
 
 const { semiBold } = font;
+const { mobileXL } = breakPoint;
+
+const Wrapper = styled(Flex)`
+  width: 52%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 16px;
+  margin: 0 auto;
+
+  @media only screen and (max-width: ${mobileXL + 1}px) {
+    width: 90%;
+  }
+`;
 
 const index = () => {
   return (
     <HomagepageLayout>
-      <Flex
-        width="52%"
-        height="100%"
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-        padding="0 16px"
-        margin="0 auto"
-      >
+      <Wrapper>
         <Flex
           width="100%"
           justifyContent="center"
           alignItems="center"
-          margin="0 0 36px 0"
+          margin="0 0 16px 0"
           wrap="wrap"
         >
           <Typo variant="h6" font={semiBold} margin="0 10px 0 0">
@@ -37,7 +45,7 @@ const index = () => {
           caption="Pokemon"
           variant="orange"
           icon="/static/svg/ic_search.svg"
-          onClick={() => (window.location.href = "/pokemon-list")}
+          onClick={() => (window.location.href = "/list-pokemon")}
         />
         <Flex width="100%" justifyContent="space-evenly" alignItems="center" wrap="wrap">
           <MenuButton
@@ -46,6 +54,7 @@ const index = () => {
             variant="green"
             icon="/static/svg/ic_compare.svg"
             margin="16px 0 0 0"
+            onClick={() => (window.location.href = "/compare-pokemon")}
           />
           <MenuButton
             label="Win Rate"
@@ -53,9 +62,10 @@ const index = () => {
             variant="blue"
             icon="/static/svg/ic_winrate.svg"
             margin="16px 0 0 0"
+            onClick={() => (window.location.href = "/win-rate-pokemon")}
           />
         </Flex>
-      </Flex>
+      </Wrapper>
     </HomagepageLayout>
   );
 };
