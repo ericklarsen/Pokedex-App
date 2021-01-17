@@ -23,8 +23,9 @@ const Container = styled(Flex)`
   border-radius: 20px;
   cursor: pointer;
   transition: all 250ms ease-in-out;
-  margin-bottom: 32px;
   animation: show-up 600ms cubic-bezier(0.66, 0, 0.19, 1);
+  margin: 0 4px;
+  margin-bottom: 32px;
 
   @media only screen and (max-width: ${mobileXL + 1}px) {
     max-width: 90%;
@@ -114,14 +115,14 @@ const Card = (props) => {
             <Typo variant="caption" color={black400} margin="0 0 2px 0">
               Weight
             </Typo>
-            <Typo font={semiBold}>{data.weight}</Typo>
+            <Typo font={semiBold}>{data.weight / 10} kg</Typo>
           </Flex>
 
           <Flex direction="column" alignItems="center">
             <Typo variant="caption" color={black400} margin="0 0 2px 0">
               Height
             </Typo>
-            <Typo font={semiBold}>{data.height}</Typo>
+            <Typo font={semiBold}>{data.height / 10} m</Typo>
           </Flex>
         </Flex>
 
