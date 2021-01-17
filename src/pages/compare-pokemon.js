@@ -20,6 +20,7 @@ const Wrapper = styled(Flex)`
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  flex-shrink: 0;
 
   @media only screen and (max-width: ${mobileXL + 1}px) {
     flex-direction: column;
@@ -34,7 +35,7 @@ const comparePokemon = () => {
 
   return (
     <ComparePageLayout>
-      <Flex direction="column" alignItems="center" margin="0 0 34px 0">
+      <Flex direction="column" alignItems="center" margin="0 0 34px 0" style={{ flexShrink: 0 }}>
         <Typo variant="body2" margin="0 0 2px 0">
           Choose
         </Typo>
