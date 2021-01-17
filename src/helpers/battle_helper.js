@@ -86,8 +86,6 @@ export const battleCalculate = async ({ myPokemon, enemyPokemon, setBattleStatis
       myDamage1 = myDamage1 * myAttack * allMyMove[myRandomMove].power;
       myDamage1 = Math.floor(myDamage1 / enemyDeff);
       myDamage1 = Math.floor(myDamage1 / 50) + 2;
-
-      // myDamage1 = Math.floor(myDamage1 * typemodif); --> set type modifier
       myDamage1 = Math.floor(myDamage1 * (stab === 0.5 ? 1 : stab));
 
       let myDamage2 = myDamage1 * myRandomNum;
