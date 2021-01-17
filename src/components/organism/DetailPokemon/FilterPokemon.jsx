@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Modal from "../../molecules/Modal/Modal";
 import styled from "styled-components";
@@ -23,7 +23,15 @@ const Container = styled(Flex)`
   scrollbar-width: thin;
 `;
 
-const FilterPokemon = ({ selected, onSelected, onCurrentUrl }) => {
+const FilterPokemon = ({
+  selectedType,
+  setSelectedType,
+  setCurrentUrl,
+  setNextUrl,
+  setPrevUrl,
+  setPokemonData,
+  onLoading,
+}) => {
   const [typeList, setTypeList] = useState([]);
   const [expandFilter, setExpandFilter] = useState(false);
 
@@ -40,15 +48,37 @@ const FilterPokemon = ({ selected, onSelected, onCurrentUrl }) => {
   };
 
   const handleSelected = (data) => {
-    onSelected(data);
+    setSelectedType(data);
     setExpandFilter(false);
   };
 
   const handleClearFilter = () => {
-    onSelected({});
-    onCurrentUrl("https://pokeapi.co/api/v2/pokemon/");
+    setSelectedType({});
+    setCurrentUrl("https://pokeapi.co/api/v2/pokemon/");
   };
 
+  useEffect(() => {
+    setCurrentUrl(null);
+    setNextUrl(null);
+    setPrevUrl(null);
+    async function fetchData() {
+      onLoading(true);
+      let response = await requestData(selectedType.url);
+      await loadPokemonDetail(response.pokemon);
+      onLoading(false);
+    }
+    selectedType?.url && fetchData();
+  }, [selectedType]);
+
+  const loadPokemonDetail = async (data) => {
+    let _data = await Promise.all(
+      data.map(async (item) => {
+        let record = await requestData(item.pokemon.url);
+        return record;
+      })
+    );
+    setPokemonData(_data);
+  };
   return (
     <>
       <Button
@@ -65,7 +95,7 @@ const FilterPokemon = ({ selected, onSelected, onCurrentUrl }) => {
           <Img src="/static/svg/ic_filter.svg" width="20px" />
         </Flex>
       </Button>
-      {selected?.url && (
+      {selectedType?.url && (
         <Button
           onClick={handleClearFilter}
           variant="purple"
@@ -79,7 +109,7 @@ const FilterPokemon = ({ selected, onSelected, onCurrentUrl }) => {
                 Type :
               </Typo>
               <Typo variant="body2" font={bold} color="white">
-                {capitalize(selected.name)}
+                {capitalize(selectedType.name)}
               </Typo>
             </Flex>
             <Img
@@ -99,7 +129,7 @@ const FilterPokemon = ({ selected, onSelected, onCurrentUrl }) => {
           <Container>
             {typeList.map((item, key) => (
               <Button
-                variant={item.name === selected.name && "orange"}
+                variant={item.name === selectedType.name && "orange"}
                 key={key}
                 width="120px"
                 margin="10px"
@@ -123,12 +153,13 @@ const FilterPokemon = ({ selected, onSelected, onCurrentUrl }) => {
 };
 
 FilterPokemon.propTypes = {
-  expandFilter: PropTypes.bool,
-  setExpandFilter: PropTypes.func,
-  data: PropTypes.array,
-  selected: PropTypes.array,
-  onSelected: PropTypes.func,
-  onCurrentUrl: PropTypes.func,
+  selectedType: PropTypes.func,
+  setSelectedType: PropTypes.func,
+  setCurrentUrl: PropTypes.func,
+  setNextUrl: PropTypes.func,
+  setPrevUrl: PropTypes.func,
+  setPokemonData: PropTypes.func,
+  onLoading: PropTypes.func,
 };
 
 export default FilterPokemon;
