@@ -2,14 +2,16 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import Flex from "../../atoms/Flex";
 import styled from "styled-components";
-import { redShades, yellowShades, font, blackShades } from "../../../styles/_variables";
+import { redShades, yellowShades, font, blackShades, breakPoint } from "../../../styles/_variables";
 import Typo from "../../atoms/Typography";
 import Img from "../../atoms/Img";
+import { capitalize } from "../../../helpers/global_helper";
 
 const { red400 } = redShades;
 const { yellow400 } = yellowShades;
 const { black400 } = blackShades;
 const { bold, semiBold } = font;
+const { mobileXL } = breakPoint;
 
 const Container = styled(Flex)`
   width: 100%;
@@ -22,8 +24,11 @@ const Container = styled(Flex)`
   cursor: pointer;
   transition: all 250ms ease-in-out;
   margin-bottom: 32px;
-
   animation: show-up 600ms cubic-bezier(0.66, 0, 0.19, 1);
+
+  @media only screen and (max-width: ${mobileXL + 1}px) {
+    max-width: 90%;
+  }
 
   @keyframes show-up {
     0% {
@@ -87,7 +92,7 @@ const Card = (props) => {
     <Container {...props}>
       <Header>
         <Flex alignItems="center" justifyContent="center" style={{ flexWrap: "wrap" }}>
-          {data.types.map((item, key) => (
+          {data.types?.map((item, key) => (
             <Fragment key={key}>
               <Typo variant="body2" font={semiBold} color="white">
                 {item.type.name}
@@ -99,10 +104,10 @@ const Card = (props) => {
       </Header>
       <Content>
         <ImageWrapper>
-          <Img width="100px" src={data.sprites.front_default} />
+          <Img width="100px" src={data?.sprites?.front_default || "/static/img/logo_pokemon.png"} />
         </ImageWrapper>
-        <Typo variant="h5" font={bold} margin="14px 0 0 0">
-          {data.name}
+        <Typo variant="h5" font={bold} margin="14px 0 0 0" style={{ textAlign: "center" }}>
+          {capitalize(data.name)}
         </Typo>
         <Flex width="100%" justifyContent="space-evenly" alignItems="center" margin="14px 0 0 0">
           <Flex direction="column" alignItems="center">
@@ -126,10 +131,10 @@ const Card = (props) => {
           </Typo>
 
           <Flex alignItems="center" justifyContent="center" style={{ flexWrap: "wrap" }}>
-            {data.abilities.map((item, key) => (
+            {data.abilities?.map((item, key) => (
               <Fragment key={key}>
                 <Typo font={semiBold} variant="body2">
-                  {item.ability.name}
+                  {capitalize(item.ability.name)}
                 </Typo>
                 {key + 1 < data.abilities.length && <Dot />}
               </Fragment>
