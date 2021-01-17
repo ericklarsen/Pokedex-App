@@ -70,7 +70,12 @@ const Bottomsheet = ({ isVisible, handleVisible, children }) => {
     <Container isVisible={isVisible}>
       <Sheet isVisible={isVisible}>
         <Header>
-          <Img width="18px" src="/static/svg/ic_close.svg" onClick={() => handleVisible(false)} />
+          <Img
+            width="18px"
+            src="/static/svg/ic_close.svg"
+            onClick={() => handleVisible(false)}
+            alt="close-button"
+          />
         </Header>
         {children}
       </Sheet>

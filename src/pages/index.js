@@ -41,7 +41,7 @@ const index = () => {
           <Typo variant="h6" font={semiBold} margin="0 10px 0 0">
             Welcome to
           </Typo>
-          <Img width="120px" src="/static/svg/ic_pokedex.svg" />
+          <Img width="120px" src="/static/svg/ic_pokedex.svg" alt="pokedex-logo" />
         </Flex>
         <MenuButton
           label="Search"
@@ -60,12 +60,12 @@ const index = () => {
             onClick={() => router.push("/compare-pokemon")}
           />
           <MenuButton
-            label="Win Rate"
-            caption="Prediction"
+            label="Battle Arena"
+            caption="Win Rate Prediction"
             variant="blue"
-            icon="/static/svg/ic_winrate.svg"
+            icon="/static/svg/ic_battle.svg"
             margin="16px 0 0 0"
-            onClick={() => router.push("/win-rate-pokemon")}
+            onClick={() => router.push("/battle-arena")}
           />
         </Flex>
       </Wrapper>

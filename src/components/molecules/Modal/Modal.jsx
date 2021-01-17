@@ -86,6 +86,7 @@ const Modal = ({ isVisible, handleVisible, title, children }) => {
             src="/static/svg/ic_close.svg"
             style={{ cursor: "pointer" }}
             onClick={() => handleVisible(false)}
+            alt="close-button"
           />
         </HeaderModal>
         {children}

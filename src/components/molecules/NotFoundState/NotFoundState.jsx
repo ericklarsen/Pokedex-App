@@ -12,6 +12,7 @@ const NotFoundState = () => {
         src="/static/img/ic_pokemon_logo_outline.png"
         maxWidth="200px"
         style={{ opacity: 0.5 }}
+        alt="pokemon-logo-outline"
       />
       <Typo color={black400} margin="8px 0 0 0">
         Not Found

@@ -20,7 +20,7 @@ const Image = styled(Img)`
 `;
 
 function Spinner(props) {
-  return <Image src="/static/img/ic_pokeball.png" {...props} />;
+  return <Image src="/static/img/ic_pokeball.png" {...props} alt="spinner" />;
 }
 
 export default Spinner;

@@ -35,6 +35,7 @@ const DesktopVersion = ({ data, abilities }) => {
             width="100%"
             src={data.sprites.front_default || "/static/img/logo_pokemon.png"}
             margin="14px 0 0 0"
+            alt="pokemon-logo"
           />
         </Flex>
 

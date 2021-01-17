@@ -25,7 +25,11 @@ const ComparePageLayout = ({ children }) => {
   return (
     <MainLayout title="Pokedex - Compare Your Pokemon">
       <Flex height="200px" width="100%" justifyContent="center" alignItems="center">
-        <Logo src="/static/img/logo_pokemon.png" onClick={() => (window.location.href = "/")} />
+        <Logo
+          src="/static/img/logo_pokemon.png"
+          onClick={() => (window.location.href = "/")}
+          alt="logo"
+        />
       </Flex>
       <Container>{children}</Container>
     </MainLayout>

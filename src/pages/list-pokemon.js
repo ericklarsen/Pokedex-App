@@ -62,7 +62,11 @@ const pokemonList = () => {
   return (
     <MainLayout title="Pokedex - List Pokemon">
       <Flex width="100%" padding="36px 16px" justifyContent="space-between" alignItems="center">
-        <Logo src="/static/img/logo_pokemon.png" onClick={() => (window.location.href = "/")} />
+        <Logo
+          src="/static/img/logo_pokemon.png"
+          onClick={() => (window.location.href = "/")}
+          alt="logo-pokemon"
+        />
         <Flex alignItems="center" wrap="wrap" justifyContent="flex-end">
           <Flex wrap="wrap" justifyContent="flex-end" alignItems="center">
             {!search && (

@@ -105,7 +105,11 @@ const Card = (props) => {
       </Header>
       <Content>
         <ImageWrapper>
-          <Img width="100px" src={data?.sprites?.front_default || "/static/img/logo_pokemon.png"} />
+          <Img
+            width="100px"
+            src={data?.sprites?.front_default || "/static/img/logo_pokemon.png"}
+            alt="pokemon"
+          />
         </ImageWrapper>
         <Typo variant="h5" font={bold} margin="14px 0 0 0" style={{ textAlign: "center" }}>
           {capitalize(data.name)}

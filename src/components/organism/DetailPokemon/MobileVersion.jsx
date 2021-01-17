@@ -30,6 +30,7 @@ const MobileVersion = ({ data, abilities }) => {
         src={data.sprites.front_default}
         margin="14px 0 0 0"
         style={{ position: "absolute", top: "-90px", margin: "0 auto", left: 0, right: 0 }}
+        alt="pokemon"
       />
 
       <Flex

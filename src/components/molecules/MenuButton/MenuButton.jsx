@@ -22,7 +22,7 @@ const MenuButton = (props) => {
           </Typo>
         </Flex>
         <Flex style={{ paddingLeft: "16px", borderLeft: "2px solid white" }}>
-          <Img width="36px" height="36px" maxWidth="36px" src={icon} />
+          <Img width="36px" height="36px" maxWidth="36px" src={icon} alt="icon-menu" />
         </Flex>
       </Flex>
     </Button>

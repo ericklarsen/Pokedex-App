@@ -115,7 +115,7 @@ const ListPokemon = ({ expand, setExpand, selected, anotherSelected, onSelected 
                     style={{ cursor: "pointer" }}
                   />
                   <Flex width="55px" height="55px" margin="0 0 0 16px">
-                    <Img src={item.sprites.front_default} maxWidth="55px" />
+                    <Img src={item.sprites.front_default} maxWidth="55px" alt="pokemon" />
                   </Flex>
                   <Flex width="100%" wrap="wrap" justifyContent="space-between">
                     <Flex width="25%" direction="column" margin="10px 0 0 24px">

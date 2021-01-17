@@ -57,7 +57,7 @@ const Loading = () => {
   return (
     <Container>
       <Overlay />
-      <LoadingIcon src="/static/img/ic_loading.png" />
+      <LoadingIcon src="/static/img/ic_loading.png" alt="loading-image" />
     </Container>
   );
 };
