@@ -33,4 +33,6 @@ React DOM
 React Responsive
 SASS
 Styled-components
+ESLint
+Prettier
 ```
