@@ -39,7 +39,7 @@ const BattleResultBox = ({ data, myPokemon, enemyPokemon }) => {
 
   return (
     <Container>
-      <Flex direction="row" width="100%" margin="0 0 24px 0">
+      <Flex direction="row" width="100%">
         {winRate ? (
           <>
             <Flex direction="column" flex="1" margin="0 16px 0 0">
@@ -60,39 +60,59 @@ const BattleResultBox = ({ data, myPokemon, enemyPokemon }) => {
             </Flex>
           </>
         ) : (
-          <Flex direction="column" flex="1">
-            <Typo variant="body2" color={black400} margin="0 0 2px 0">
-              The fight is
-            </Typo>
-            <Typo variant="h4" font={bold}>
-              DRAW
-            </Typo>
-          </Flex>
+          <>
+            <Flex direction="column" flex="1">
+              <Typo variant="body2" color={black400} margin="0 0 2px 0">
+                The fight is
+              </Typo>
+              <Typo variant="h4" font={bold}>
+                DRAW
+              </Typo>
+            </Flex>
+            <Flex direction="column" flex="1">
+              <Typo variant="body2" color={black400} margin="0 0 2px 0">
+                My Pokemon
+              </Typo>
+              <Typo variant="h4" font={bold}>
+                50%
+              </Typo>
+            </Flex>
+            <Flex direction="column" flex="1">
+              <Typo variant="body2" color={black400} margin="0 0 2px 0">
+                Enemy Pokemon
+              </Typo>
+              <Typo variant="h4" font={bold}>
+                50%
+              </Typo>
+            </Flex>
+          </>
         )}
       </Flex>
-      <Flex direction="row" width="100%">
-        <Flex direction="column" flex="1" alignItems="center">
-          <Img width="100%" maxWidth="140px" src={winner?.sprites?.front_default} />
-          <Typo variant="body2" color={black400} margin="8px 0 0 0">
-            Winner
-          </Typo>
+      {winRate && (
+        <Flex direction="row" width="100%" margin="24px 0 0 0">
+          <Flex direction="column" flex="1" alignItems="center">
+            <Img width="100%" maxWidth="140px" src={winner?.sprites?.front_default} />
+            <Typo variant="body2" color={black400} margin="8px 0 0 0">
+              Winner
+            </Typo>
+          </Flex>
+          <Flex direction="column" flex="1" alignItems="center">
+            <Img
+              width="100%"
+              maxWidth="140px"
+              src={
+                winner?.id === enemyPokemon.id
+                  ? myPokemon.sprites.front_default
+                  : enemyPokemon.sprites.front_default
+              }
+              style={{ filter: "grayscale(100%) " }}
+            />
+            <Typo variant="body2" color={black400} margin="8px 0 0 0">
+              Loser
+            </Typo>
+          </Flex>
         </Flex>
-        <Flex direction="column" flex="1" alignItems="center">
-          <Img
-            width="100%"
-            maxWidth="140px"
-            src={
-              winner?.id === enemyPokemon.id
-                ? myPokemon.sprites.front_default
-                : enemyPokemon.sprites.front_default
-            }
-            style={{ filter: "grayscale(100%) " }}
-          />
-          <Typo variant="body2" color={black400} margin="8px 0 0 0">
-            Loser
-          </Typo>
-        </Flex>
-      </Flex>
+      )}
     </Container>
   );
 };
