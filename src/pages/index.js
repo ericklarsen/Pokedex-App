@@ -7,6 +7,7 @@ import Img from "../components/atoms/Img";
 import MenuButton from "../components/molecules/MenuButton/MenuButton";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const { semiBold } = font;
 const { mobileXL } = breakPoint;
@@ -43,30 +44,36 @@ const index = () => {
           </Typo>
           <Img width="120px" src="/static/svg/ic_pokedex.svg" alt="pokedex-logo" />
         </Flex>
-        <MenuButton
-          label="Search"
-          caption="Pokemon"
-          variant="orange"
-          icon="/static/svg/ic_search.svg"
-          onClick={() => router.push("/list-pokemon")}
-        />
-        <Flex width="100%" justifyContent="space-evenly" alignItems="center" wrap="wrap">
+        <Link href="/list-pokemon">
           <MenuButton
-            label="Compare"
+            label="Search"
             caption="Pokemon"
-            variant="green"
-            icon="/static/svg/ic_compare.svg"
-            margin="16px 0 0 0"
-            onClick={() => router.push("/compare-pokemon")}
+            variant="orange"
+            icon="/static/svg/ic_search.svg"
+            // onClick={() => (window.location.href = "/list-pokemon")}
           />
-          <MenuButton
-            label="Battle Arena"
-            caption="Win Rate Prediction"
-            variant="blue"
-            icon="/static/svg/ic_battle.svg"
-            margin="16px 0 0 0"
-            onClick={() => router.push("/battle-arena")}
-          />
+        </Link>
+        <Flex width="100%" justifyContent="space-evenly" alignItems="center" wrap="wrap">
+          <Link href="/compare-pokemon">
+            <MenuButton
+              label="Compare"
+              caption="Pokemon"
+              variant="green"
+              icon="/static/svg/ic_compare.svg"
+              margin="16px 0 0 0"
+              // onClick={() => (window.location.href = "/compare-pokemon")}
+            />
+          </Link>
+          <Link href="/battle-arena">
+            <MenuButton
+              label="Battle Arena"
+              caption="Win Rate Prediction"
+              variant="blue"
+              icon="/static/svg/ic_battle.svg"
+              margin="16px 0 0 0"
+              // onClick={() => (window.location.href = "/battle-arena")}
+            />
+          </Link>
         </Flex>
       </Wrapper>
     </HomagepageLayout>
