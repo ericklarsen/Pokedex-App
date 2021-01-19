@@ -16,8 +16,8 @@ const ImageOverlayBottom = styled.img`
   right: ${(props) => props.right && "10%"};
   bottom: -6%;
   z-index: -1;
-  animation: infinite ${(props) => (props.right ? "right-animate" : props.left && "left-animate")}
-    2.5s cubic-bezier(0.66, 0, 0.19, 1);
+  animation: infinite ${(props) => (props.right ? "right" : props.left && "left")} 2.5s
+    cubic-bezier(0.66, 0, 0.19, 1);
 
   @media only screen and (max-width: ${tabletXL + 1}px) {
     max-width: 240px;
@@ -27,7 +27,7 @@ const ImageOverlayBottom = styled.img`
     opacity: 0;
   }
 
-  @keyframes right-animate {
+  @keyframes right {
     0% {
       transform: scale(1) rotate(0deg);
     }
@@ -39,7 +39,7 @@ const ImageOverlayBottom = styled.img`
     }
   }
 
-  @keyframes left-animate {
+  @keyframes left {
     0% {
       transform: scale(1) rotate(0deg);
     }
